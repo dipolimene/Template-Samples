@@ -1,0 +1,48 @@
+{
+    "mode": "All",
+    "policyRule": {
+        "if": {
+            "allOf": [{
+                "field": "type",
+                "Equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                }]
+            },
+        "then": {
+            "effect": "deployIfNotExists",
+            "details": {
+                "type": "Microsoft.Authorization/locks",
+                "roleDefinitionIds": [ "/subscriptions/ebe731f6-78dd-478b-ae32-d149303f3222/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635" ],
+                "existenceCondition": 
+                    {
+                    "field": "Microsoft.Authorization/locks/level",
+                    "in": [ "CanNotDelete" ]
+                    },
+                "deployment": {
+                    "properties": {
+                        "mode": "Incremental",
+                        "template": {
+                            "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                            "contentVersion": "1.0.0.0",
+                            "parameters": {},
+                            "variables": {
+                                "RGName": "[resourceGroup().name]",
+                                "LockName": "[concat(variables('RGName'),'_deletelock')]"
+                            },
+                            "resources": [{
+                                "type": "Microsoft.Authorization/locks",
+                                "apiVersion": "2015-01-01",
+                                "name": "[variables('LockName')]",
+                                "properties": {
+                                    "level": "CanNotDelete",
+                                    "notes": "ResourceLock by Policy"
+                                }
+                            }],
+                            "outputs": {}
+                        }
+                    },
+                    "parameters": {}
+                }
+            }
+        }
+    }
+}

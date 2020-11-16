@@ -1,0 +1,24 @@
+{
+        "mode": "All",
+        "policyRule": {
+            "if": {
+                "allOf": [{
+                        "field": "type",
+                        "equals": "Microsoft.Resources/subscriptions"
+                         }]
+            },
+            "then": {
+                "effect": "auditIfNotExists",
+                "details": {
+                    "type": "Microsoft.Authorization/roleDefinitions",
+                "existenceCondition":{
+                  "allOf":[{
+                       "field": "Microsoft.Authorization/roleDefinitions/roleName",
+                       "equals": "Owner"
+                          }]
+                        }
+                   
+                    }
+                }
+            }  
+}

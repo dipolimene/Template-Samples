@@ -1,0 +1,38 @@
+{
+    "mode": "Indexed",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "notequals": "Microsoft.DevTestLab/schedules"
+                },
+                {
+                    "not": {
+                        "field": "[concat('tags[', parameters('tagName'), ']')]",
+                        "in": "[parameters('tagValue')]"
+                    }
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    },
+    "parameters": {
+        "tagName": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag Name",
+                "description": "Name of the tag, such as 'environment'"
+            }
+        },
+        "tagValue": {
+            "type": "Array",
+            "metadata": {
+                "displayName": "Tag Value",
+                "description": "Value of the tag, such as 'production'"
+            }
+        }
+    }
+}

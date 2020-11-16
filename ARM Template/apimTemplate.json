@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "type": "Microsoft.ApiManagement/service",
+            "apiVersion": "2019-01-01",
+            "name": "oauth2-0",
+            "location": "Central US",
+            "tags": {
+                "displayName": "API Management Service",
+                "application": "oauth2-0 api",
+                "environment": "UAT",
+                "version": "1.0.0"
+            },
+            "sku": {
+                "name": "Developer",
+                "capacity": "1"
+            },
+            "identity": {
+                "type": "SystemAssigned",
+                "principalid": "93f50c9b-b3f2-471c-ba38-b489b18b9146"
+
+            },
+            "properties": {
+                "publisherEmail": "dipotope@yahoo.com",
+                "publisherName": "OO",
+                "hostnameConfigurations": [
+                    {
+                        "type": "Portal",
+                        "hostName": "portal.theoots.com",
+                        "keyVaultId": "https://pm111.vault.azure.net/secrets/WildCardMask",
+                        "defaultSslBinding": false,
+                        "negotiateClientCertificate": false,
+                        "certificate": {
+                            "expiry": "07/17/2020 7:47:26 AM",
+                            "thumbprint": "71A2A06186F189C5D25532B68AE27578D294356C",
+                            "subject": "CN=*.theoots.com"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

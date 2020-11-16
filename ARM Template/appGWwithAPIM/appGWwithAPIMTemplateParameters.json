@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "applicationGatewayName": {
+            "value": "playapp"
+        },
+        "tier": {
+            "value": "WAF"
+        },
+        "skuSize": {
+            "value": "WAF_Medium"
+        },
+        "capacity": {
+            "value": 2
+        },
+        "subnetName": {
+            "value": "appgw-subnet"
+        },
+        "zones": {
+            "value": []
+        },
+        "publicIpAddressName": {
+            "value": "testpip"
+        },
+        "sku": {
+            "value": "Basic"
+        },
+        "allocationMethod": {
+            "value": "Dynamic"
+        },
+        "publicIpZones": {
+            "value": []
+        },
+        "theootswildcard_data": {
+            "value": null
+        },
+        "theootswildcard_password": {
+            "value": null
+        },
+        "theootswildcardnext_data": {
+            "value": null
+        },
+        "theootswildcardnext_password": {
+            "value": null
+        },
+        "proxyhttpsettings_httpCert": {
+            "value": null
+        },
+        "portalhttpsettings_httpCert": {
+            "value": null
+        }
+    }
+}

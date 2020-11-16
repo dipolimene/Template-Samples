@@ -1,0 +1,1129 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "routeTables": {
+            "defaultValue": "forceTunneling",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2019-11-01",
+            "name": "[parameters('routeTables')]",
+            "location": "westeurope",
+            "tags": {
+                "ManagedBy": "v-ololim"
+            },
+            "properties": {
+                "disableBgpRoutePropagation": false,
+                "routes": [
+                    {
+                        "name": "SouthCentralUS",
+                        "properties": {
+                            "addressPrefix": "104.214.19.224/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "NorthCentralUS",
+                        "properties": {
+                            "addressPrefix": "52.162.110.80/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "WestCentralUS",
+                        "properties": {
+                            "addressPrefix": "52.253.135.58/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "KoreaCentral",
+                        "properties": {
+                            "addressPrefix": "40.82.157.167/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "UKWest",
+                        "properties": {
+                            "addressPrefix": "51.137.136.0/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "JapanWest",
+                        "properties": {
+                            "addressPrefix": "40.81.185.8/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "NorthCentralUSNotGlobal",
+                        "properties": {
+                            "addressPrefix": "40.81.47.216/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "UKSouth",
+                        "properties": {
+                            "addressPrefix": "51.145.56.125/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "WestIndia",
+                        "properties": {
+                            "addressPrefix": "40.81.89.24/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "EastUS",
+                        "properties": {
+                            "addressPrefix": "52.224.186.99/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "WestEurope",
+                        "properties": {
+                            "addressPrefix": "51.145.179.78/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "JapanEast",
+                        "properties": {
+                            "addressPrefix": "52.140.238.179/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "FranceCentral",
+                        "properties": {
+                            "addressPrefix": "40.66.60.111/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "CanadaEast",
+                        "properties": {
+                            "addressPrefix": "52.139.80.117/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "UAENorth",
+                        "properties": {
+                            "addressPrefix": "20.46.144.85/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "BrazilSouth",
+                        "properties": {
+                            "addressPrefix": "191.233.24.179/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "SouthEastAsia",
+                        "properties": {
+                            "addressPrefix": "40.90.185.46/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "SouthAfricaNorth",
+                        "properties": {
+                            "addressPrefix": "102.133.130.197/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "CanadaCentral",
+                        "properties": {
+                            "addressPrefix": "52.139.20.34/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "KoreaSouth",
+                        "properties": {
+                            "addressPrefix": "40.80.232.185/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "CentralIndia",
+                        "properties": {
+                            "addressPrefix": "13.71.49.1/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "WestUS",
+                        "properties": {
+                            "addressPrefix": "13.64.39.16/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "AustraliaSouthEast",
+                        "properties": {
+                            "addressPrefix": "20.40.160.107/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "AustraliaCentral",
+                        "properties": {
+                            "addressPrefix": "20.37.52.67/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "SouthIndia",
+                        "properties": {
+                            "addressPrefix": "20.44.33.246/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "CentralUS",
+                        "properties": {
+                            "addressPrefix": "13.86.102.66/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "AustraliaEast",
+                        "properties": {
+                            "addressPrefix": "20.40.125.155/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "WestUS2",
+                        "properties": {
+                            "addressPrefix": "51.143.127.203/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "EastUS2EUAP",
+                        "properties": {
+                            "addressPrefix": "52.253.229.253/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "CentralUSEUAP",
+                        "properties": {
+                            "addressPrefix": "52.253.159.160/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "SouthCentralUSNotGlobal",
+                        "properties": {
+                            "addressPrefix": "20.188.77.119/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "EastUS2",
+                        "properties": {
+                            "addressPrefix": "20.44.72.3/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "NorthEurope",
+                        "properties": {
+                            "addressPrefix": "52.142.95.35/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "EastAsia",
+                        "properties": {
+                            "addressPrefix": "52.139.152.27/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "FranceSouth",
+                        "properties": {
+                            "addressPrefix": "20.39.80.2/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "SwitzerlandWest",
+                        "properties": {
+                            "addressPrefix": "51.107.96.8/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "AustraliaCentral2",
+                        "properties": {
+                            "addressPrefix": "20.39.99.81/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "UAECentral",
+                        "properties": {
+                            "addressPrefix": "20.37.81.41/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "SwitzerlandNorth",
+                        "properties": {
+                            "addressPrefix": "51.107.0.91/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "SouthAfricaWest",
+                        "properties": {
+                            "addressPrefix": "102.133.0.79/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "GermanyWestCentral",
+                        "properties": {
+                            "addressPrefix": "51.116.96.0/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "GermanyNorth",
+                        "properties": {
+                            "addressPrefix": "51.116.0.0/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "NorwayEast",
+                        "properties": {
+                            "addressPrefix": "51.120.2.185/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "NorwayWest",
+                        "properties": {
+                            "addressPrefix": "51.120.130.134/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "ChinaNorthGlobal",
+                        "properties": {
+                            "addressPrefix": "139.217.51.16/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "ChinaEastGlobal",
+                        "properties": {
+                            "addressPrefix": "139.217.171.176/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "ChinaNorth",
+                        "properties": {
+                            "addressPrefix": "40.125.137.220/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "ChinaEast",
+                        "properties": {
+                            "addressPrefix": "40.126.120.30/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "ChinaNorth2",
+                        "properties": {
+                            "addressPrefix": "40.73.41.178/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "ChinaEast2",
+                        "properties": {
+                            "addressPrefix": "40.73.104.4/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "USGovVirginiaGlobal",
+                        "properties": {
+                            "addressPrefix": "52.127.42.160/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "USGovTexasGlobal",
+                        "properties": {
+                            "addressPrefix": "52.127.34.192/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "USGovVirginia",
+                        "properties": {
+                            "addressPrefix": "52.227.222.92/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "USGovIowa",
+                        "properties": {
+                            "addressPrefix": "13.73.72.21/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "USGovArizona",
+                        "properties": {
+                            "addressPrefix": "52.244.32.39/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "USGovTexas",
+                        "properties": {
+                            "addressPrefix": "52.243.154.118/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "USDoDCentral",
+                        "properties": {
+                            "addressPrefix": "52.182.32.132/32",
+                            "nextHopType": "Internet"
+                        }
+                    },
+                    {
+                        "name": "USDoDEast",
+                        "properties": {
+                            "addressPrefix": "52.181.32.192/32",
+                            "nextHopType": "Internet"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/AustraliaCentral')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.37.52.67/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/AustraliaCentral2')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.39.99.81/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/AustraliaEast')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.40.125.155/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/AustraliaSouthEast')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.40.160.107/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/BrazilSouth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "191.233.24.179/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/CanadaCentral')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.139.20.34/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/CanadaEast')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.139.80.117/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/CentralIndia')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "13.71.49.1/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/CentralUS')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "13.86.102.66/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/CentralUSEUAP')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.253.159.160/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/ChinaEast')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.126.120.30/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/ChinaEast2')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.73.104.4/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/ChinaEastGlobal')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "139.217.171.176/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/ChinaNorth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.125.137.220/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/ChinaNorth2')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.73.41.178/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/ChinaNorthGlobal')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "139.217.51.16/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/EastAsia')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.139.152.27/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/EastUS')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.224.186.99/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/EastUS2')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.44.72.3/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/EastUS2EUAP')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.253.229.253/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/FranceCentral')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.66.60.111/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/FranceSouth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.39.80.2/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/GermanyNorth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.116.0.0/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/GermanyWestCentral')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.116.96.0/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/JapanEast')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.140.238.179/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/JapanWest')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.81.185.8/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/KoreaCentral')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.82.157.167/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/KoreaSouth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.80.232.185/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/NorthCentralUS')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.162.110.80/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/NorthCentralUSNotGlobal')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.81.47.216/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/NorthEurope')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.142.95.35/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/NorwayEast')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.120.2.185/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/NorwayWest')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.120.130.134/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/SouthAfricaNorth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "102.133.130.197/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/SouthAfricaWest')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "102.133.0.79/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/SouthCentralUS')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "104.214.19.224/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/SouthCentralUSNotGlobal')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.188.77.119/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/SouthEastAsia')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.90.185.46/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/SouthIndia')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.44.33.246/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/SwitzerlandNorth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.107.0.91/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/SwitzerlandWest')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.107.96.8/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/UAECentral')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.37.81.41/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/UAENorth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "20.46.144.85/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/UKSouth')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.145.56.125/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/UKWest')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.137.136.0/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/USDoDCentral')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.182.32.132/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/USDoDEast')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.181.32.192/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/USGovArizona')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.244.32.39/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/USGovIowa')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "13.73.72.21/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/USGovTexas')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.243.154.118/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/USGovTexasGlobal')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.127.34.192/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/USGovVirginia')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.227.222.92/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/USGovVirginiaGlobal')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.127.42.160/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/WestCentralUS')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "52.253.135.58/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/WestEurope')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.145.179.78/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/WestIndia')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "40.81.89.24/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/WestUS')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "13.64.39.16/32",
+                "nextHopType": "Internet"
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2019-11-01",
+            "name": "[concat(parameters('routeTables'), '/WestUS2')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables'))]"
+            ],
+            "properties": {
+                "addressPrefix": "51.143.127.203/32",
+                "nextHopType": "Internet"
+            }
+        }
+    ]
+}
