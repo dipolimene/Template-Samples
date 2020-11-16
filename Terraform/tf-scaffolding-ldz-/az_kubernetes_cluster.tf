@@ -1,0 +1,42 @@
+# AKS Cluster
+
+resource "azurerm_kubernetes_cluster" "demo" {
+  name                = "${local.prefix}-aks"
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+  dns_prefix          = "${local.prefix}-aks"
+
+  default_node_pool {
+    name                = "default"
+    node_count          = 2
+    vm_size             = "Standard_D2_v2"
+    type                = "VirtualMachineScaleSets"
+    availability_zones  = ["1", "2"]
+    enable_auto_scaling = true
+    min_count           = 2
+    max_count           = 4
+    vnet_subnet_id      = azurerm_subnet.subnet_aks.id
+  }
+
+#  identity {
+#    type = "SystemAssigned"
+#  }
+
+#  role_based_access_control {
+#    azure_active_directory {
+#      client_app_id     = var.client_app_id
+#      server_app_id     = var.server_app_id
+#      server_app_secret = var.server_app_secret
+#      tenant_id         = var.tenant_id
+#    }
+#    enabled = true
+#  }
+
+  network_profile {
+    network_plugin    = "azure"
+    load_balancer_sku = "standard"
+    network_policy    = "calico"
+  }
+
+  tags                = azurerm_resource_group.resource_group.tags
+}
