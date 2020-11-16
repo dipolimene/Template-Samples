@@ -22,12 +22,6 @@ variable "subnet_aks_address" {
   default     = "10.2.0.0/22"
 }
 
-variable "resource_group_name" {
-  description = "The resource group name"
-  type        = string
-  default     = "halloween"
-}
-
 variable "location" {
   description = "The region"
   type        = string
