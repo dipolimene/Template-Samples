@@ -1,11 +1,12 @@
 #Set the Provider
 provider "azurerm" {
+  # The "feature" block is required for AzureRM provider 2.x. 
+  # If you are using version 1.x, the "features" block is not allowed.
   
-  subscription_id = "1"
-  client_id       = "2"
-  client_secret   = "3"
-  tenant_id       = "4"
-
   features {}
 
+}
+
+terraform {
+    backend "azurerm" {}
 }

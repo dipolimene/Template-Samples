@@ -1,6 +1,6 @@
 # AKS Cluster
 
-resource "azurerm_kubernetes_cluster" "demo" {
+resource "azurerm_kubernetes_cluster" "aks" {
   name                = "${local.prefix}-aks"
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
@@ -31,6 +31,11 @@ resource "azurerm_kubernetes_cluster" "demo" {
 #    }
 #    enabled = true
 #  }
+
+  service_principal {
+    client_id       = "cd2df622-b890-4a5a-baeb-ec22f7f0630b"
+    client_secret   = "l7~~pYGUax25_2RQn7zBkq1bl_.bluh7gT"
+    }
 
   network_profile {
     network_plugin    = "azure"

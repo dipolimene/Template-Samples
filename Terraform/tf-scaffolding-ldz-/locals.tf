@@ -27,5 +27,5 @@ locals {
   diag_appgw_metrics = [
     "AllMetrics",
   ]
-
+  
 }

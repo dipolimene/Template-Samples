@@ -17,9 +17,9 @@ variable "vnet_aks_address" {
 }
 
 variable "subnet_aks_address" {
-  description = "The CIDR address of aks subnet, /27 address to minimum allowed"
+  description = "The CIDR address of aks subnet, /22 address to minimum allowed"
   type        = string
-  default     = "10.2.2.0/27"
+  default     = "10.2.0.0/22"
 }
 
 variable "resource_group_name" {
