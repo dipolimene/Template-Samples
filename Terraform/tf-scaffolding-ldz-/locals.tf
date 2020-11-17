@@ -1,8 +1,8 @@
 locals {
 
   prefix   = "halo-mvct"
-  sku_name = "Standard_Small"
-  sku_tier = "Standard"
+  sku_name = "Standard_v2"
+  sku_tier = "Standard_v2"
   capacity = 2
 
   appname = "halo-mvct-site"
