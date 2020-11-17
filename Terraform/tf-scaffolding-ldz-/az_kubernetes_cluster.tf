@@ -1,7 +1,7 @@
 # AKS Cluster
 
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                = "${local.prefix}-aks"
+  name                = "${local.prefix}-aks-me"
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
   dns_prefix          = "${local.prefix}-aks"
@@ -18,24 +18,25 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id      = azurerm_subnet.subnet_aks.id
   }
 
-#  identity {
-#    type = "SystemAssigned"
-#  }
+ identity {
+   type = "SystemAssigned"
+ }
 
-#  role_based_access_control {
-#    azure_active_directory {
-#      client_app_id     = var.client_app_id
-#      server_app_id     = var.server_app_id
-#      server_app_secret = var.server_app_secret
-#      tenant_id         = var.tenant_id
-#    }
-#    enabled = true
-#  }
 
-  service_principal {
-    client_id       = "XXXX"
-    client_secret   = "XXXX"
-    }
+ role_based_access_control {
+  #  azure_active_directory {
+  #    client_app_id     = var.client_app_id
+  #    server_app_id     = var.server_app_id
+  #    server_app_secret = var.server_app_secret
+  #    tenant_id         = azurerm_client_config.current.tenant_id
+  #  }
+   enabled = true
+ }
+
+  # service_principal {
+  #   client_id       = "48ebeb26-9082-4fed-8011-c0dae6568430"
+  #   client_secret   = ".M9~AI~~r6Gc0Y6ZRsTl.MHwpqs0V02m~D"
+  #   }
 
   network_profile {
     network_plugin    = "azure"

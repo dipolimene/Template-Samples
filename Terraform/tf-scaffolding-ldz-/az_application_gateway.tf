@@ -8,8 +8,8 @@ resource "azurerm_application_gateway" "agw" {
   tags                = azurerm_resource_group.resource_group.tags
 
   sku {
-    name = local.sku_name
-    tier = local.sku_tier
+    name = "Standard_v2" #local.sku_name
+    tier = "Standard_v2" #local.sku_tier
     capacity = local.capacity
   }
 

@@ -3,7 +3,7 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "kv" {
-  name                       = "${local.prefix}-key-vault"
+  name                       = "${local.prefix}-key-vault-me"
   location                   = azurerm_resource_group.resource_group.location
   resource_group_name        = azurerm_resource_group.resource_group.name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
@@ -11,10 +11,10 @@ resource "azurerm_key_vault" "kv" {
   purge_protection_enabled   = false
   sku_name                   = "standard"
 
-    network_acls {
-      default_action = "Deny"
-      bypass         = "AzureServices"
-    }
+    # network_acls {
+    #   default_action = "Deny"
+    #   bypass         = "AzureServices"
+    # }
 
   tags = azurerm_resource_group.resource_group.tags
 }
@@ -84,6 +84,7 @@ resource "azurerm_key_vault_access_policy" "kv" {
 resource "azurerm_key_vault_certificate" "mvctsite" {
   name         = "mvctsite"
   key_vault_id = azurerm_key_vault.kv.id
+  depends_on = [azurerm_key_vault_access_policy.builder, azurerm_key_vault_access_policy.kv]
 
   certificate_policy {
     issuer_parameters {
