@@ -43,13 +43,20 @@ resource "azurerm_kubernetes_cluster" "aks" {
     enabled                    = true
     log_analytics_workspace_id = azurerm_log_analytics_workspace.oms.id
   }
+
+  http_application_routing {
+      enabled         = false
+    }
 }
 
   network_profile {
     network_plugin    = "azure"
-    load_balancer_sku = "standard"
-    network_policy    = "calico"
+#    load_balancer_sku = "standard"
+#    network_policy    = "calico"  
+    dns_service_ip     = var.aks_dns_service_ip
+    docker_bridge_cidr = var.aks_docker_bridge_cidr
+    service_cidr       = var.aks_service_cidr
   }
 
-  tags                = azurerm_resource_group.resource_group.tags
+  depends_on = [azurerm_virtual_network.vnet_aks, azurerm_virtual_network.vnet_app_gateway, azurerm_application_gateway.agw]
 }
