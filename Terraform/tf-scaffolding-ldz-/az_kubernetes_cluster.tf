@@ -1,7 +1,11 @@
 # AKS Cluster
 
+#data "azuread_group" "aks" {
+#  name = local.aad_group_name
+#}
+
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                = "${local.prefix}-aks-me"
+  name                = "${local.prefix}-aks"
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
   dns_prefix          = "${local.prefix}-aks"
@@ -24,19 +28,22 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 
  role_based_access_control {
-  #  azure_active_directory {
-  #    client_app_id     = var.client_app_id
-  #    server_app_id     = var.server_app_id
-  #    server_app_secret = var.server_app_secret
-  #    tenant_id         = azurerm_client_config.current.tenant_id
-  #  }
    enabled = true
+  
+#  azure_active_directory {
+#      managed                 = true
+#      admin_group_object_ids  = [
+#        data.azuread_group.aks.id
+#      ]
+#    }
  }
 
-  # service_principal {
-  #   client_id       = "48ebeb26-9082-4fed-8011-c0dae6568430"
-  #   client_secret   = ".M9~AI~~r6Gc0Y6ZRsTl.MHwpqs0V02m~D"
-  #   }
+ addon_profile {
+  oms_agent {
+    enabled                    = true
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.oms.id
+  }
+}
 
   network_profile {
     network_plugin    = "azure"

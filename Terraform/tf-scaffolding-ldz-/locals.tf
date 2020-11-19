@@ -25,5 +25,7 @@ locals {
   diag_appgw_metrics = [
     "AllMetrics",
   ]
+
+  aad_group_name     = "AKS-Admins"
   
 }
