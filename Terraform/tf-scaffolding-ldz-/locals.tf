@@ -17,15 +17,6 @@ locals {
   request_routing_rule_name      = "${local.appname}-rqrt"
   redirect_configuration_name    = "${local.appname}-rdrcfg"
 
-  diag_appgw_logs = [
-    "ApplicationGatewayAccessLog",
-    "ApplicationGatewayPerformanceLog",
-    "ApplicationGatewayFirewallLog",
-  ]
-  diag_appgw_metrics = [
-    "AllMetrics",
-  ]
-
-  aad_group_name     = "AKS-Admins"
+  acr_name  = "halomvctacr"
   
 }

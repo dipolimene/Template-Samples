@@ -10,7 +10,7 @@ resource "azurerm_role_assignment" "aks_subnet" {
   scope                = azurerm_subnet.subnet_aks.id
   role_definition_name = "Network Contributor"
   principal_id         = azurerm_kubernetes_cluster.aks.identity[0].principal_id
-  depends_on           = [azurerm_virtual_network.vnet_aks]
+  depends_on           = [azurerm_virtual_network.vnet]
 }
 resource "azurerm_role_assignment" "acr" {
   scope                = azurerm_container_registry.acr.id

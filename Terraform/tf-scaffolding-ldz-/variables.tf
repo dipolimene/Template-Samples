@@ -1,25 +1,21 @@
-variable "vnet_app_gateway_address" {
-  description = "The CIDR address of the application gateway vnet"
-  type        = string
-  default     = "10.1.0.0/16"
-}
+# Variables
 
-variable "subnet_app_gateway_address" {
-  description = "The CIDR address of the application gateway subnet, /27 address to minimum allowed"
+variable "vnet_address" {
+  description = "The CIDR address of vnet"
   type        = string
-  default     = "10.1.1.0/27"
-}
-
-variable "vnet_aks_address" {
-  description = "The CIDR address of aks vnet"
-  type        = string
-  default     = "10.2.0.0/16"
+  default     = "15.0.0.0/8"
 }
 
 variable "subnet_aks_address" {
   description = "The CIDR address of aks subnet, /22 address to minimum allowed"
   type        = string
-  default     = "10.2.0.0/22"
+  default     = "15.0.0.0/16"
+}
+
+variable "subnet_app_gateway_address" {
+  description = "The CIDR address of the application gateway subnet, /27 address to minimum allowed"
+  type        = string
+  default     = "15.1.0.0/16"
 }
 
 variable "location" {

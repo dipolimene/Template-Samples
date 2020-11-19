@@ -10,27 +10,12 @@ output "rgname" {
 
 output "rglocation" {
   value = azurerm_resource_group.resource_group.location
-  description = "RG name"
+  description = "Resource group region"
 }
 
-output "vnet-app-gw" {
-  value = azurerm_virtual_network.vnet_app_gateway
-  description = "Application Gateway VNET refrence"
-}
-
-output "subnet-app-gw" {
-  value = azurerm_subnet.subnet_app_gateway
-  description = "Application Gateway subnet reference"
-}
-
-output "subnet-app-gw-id" {
-  value = azurerm_subnet.subnet_app_gateway.id
-  description = "Application Gateway subnet ID "
-}
-
-output "vnet-aks" {
-  value = azurerm_virtual_network.vnet_aks
-  description = "AKS VNET refrence"
+output "vnet" {
+  value = azurerm_virtual_network.vnet
+  description = "Virtual Network refrence"
 }
 
 output "subnet-aks" {
@@ -43,11 +28,21 @@ output "subnet-aks-id" {
   description = "AKS subnet ID "
 }
 
-output "fqdn" {
+output "subnet-app-gw" {
+  value = azurerm_subnet.subnet_app_gateway
+  description = "Application Gateway subnet reference"
+}
+
+output "subnet-app-gw-id" {
+  value = azurerm_subnet.subnet_app_gateway.id
+  description = "Application Gateway subnet ID "
+}
+
+output "aks_fqdn" {
   value = azurerm_kubernetes_cluster.aks.fqdn
 }
 
-output "name" {
+output "aks_name" {
   value = azurerm_kubernetes_cluster.aks.name
 }
 
@@ -106,17 +101,20 @@ output "host" {
   value = azurerm_kubernetes_cluster.aks.kube_admin_config[0].host
 }
 
-output "oms" {
-  value = azurerm_log_analytics_workspace.oms
-  description = "Log Analytics Workspace reference"
-}
-
 output "login_server" {
   value = azurerm_container_registry.acr.login_server
+  description = "Azure Container Registry server login reference"
 }
 
 output "acr_id" {
   value = azurerm_container_registry.acr.id
+    description = "Azure Container reference ID"
 }
+
+output "log_analytics" {
+  value = azurerm_log_analytics_workspace.oms
+  description = "Log Analytics Workspace reference"
+}
+
 
 

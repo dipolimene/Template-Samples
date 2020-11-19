@@ -1,9 +1,5 @@
 # AKS Cluster
 
-#data "azuread_group" "aks" {
-#  name = local.aad_group_name
-#}
-
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "${local.prefix}-aks"
   location            = azurerm_resource_group.resource_group.location
@@ -29,13 +25,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
  role_based_access_control {
    enabled = true
-  
-#  azure_active_directory {
-#      managed                 = true
-#      admin_group_object_ids  = [
-#        data.azuread_group.aks.id
-#      ]
-#    }
  }
 
  addon_profile {
@@ -50,13 +39,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
 }
 
   network_profile {
-    network_plugin    = "azure"
-#    load_balancer_sku = "standard"
-#    network_policy    = "calico"  
+    network_plugin     = "azure"
     dns_service_ip     = var.aks_dns_service_ip
     docker_bridge_cidr = var.aks_docker_bridge_cidr
     service_cidr       = var.aks_service_cidr
   }
 
-  depends_on = [azurerm_virtual_network.vnet_aks, azurerm_virtual_network.vnet_app_gateway, azurerm_application_gateway.agw]
+  depends_on = [azurerm_virtual_network.vnet, azurerm_application_gateway.agw]
 }

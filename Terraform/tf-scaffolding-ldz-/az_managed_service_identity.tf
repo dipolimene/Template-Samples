@@ -1,4 +1,4 @@
-# - Managed Service Identity
+# Managed Service Identity
 
 resource "azurerm_user_assigned_identity" "msi" {
   location            = azurerm_resource_group.resource_group.location
