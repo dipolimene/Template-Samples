@@ -71,17 +71,15 @@ output "kubelet_user_assigned_identity_id" {
 }
 
 output "client_key" {
-  value     = azurerm_kubernetes_cluster.aks.kube_admin_config[0].client_key
-  sensitive = true
+  value     = azurerm_kubernetes_cluster.aks.kube_config[0].client_key
 }
 
 output "client_certificate" {
-  value     = azurerm_kubernetes_cluster.aks.kube_admin_config[0].client_certificate
-  sensitive = true
+  value     = azurerm_kubernetes_cluster.aks.kube_config[0].client_certificate
 }
 
 output "cluster_ca_certificate" {
-  value     = azurerm_kubernetes_cluster.aks.kube_admin_config[0].cluster_ca_certificate
+  value     = azurerm_kubernetes_cluster.aks.kube_config[0].cluster_ca_certificate
   sensitive = true
 }
 
@@ -98,7 +96,7 @@ output "kube_config" {
 }
 
 output "host" {
-  value = azurerm_kubernetes_cluster.aks.kube_admin_config[0].host
+  value = azurerm_kubernetes_cluster.aks.kube_config[0].host
 }
 
 output "login_server" {
