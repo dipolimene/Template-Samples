@@ -1,0 +1,58 @@
+az aks get-credentials --name halo-mvct-aks --resource-group halo-mvct-rg
+
+kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment-rbac.yaml
+
+kubectl create serviceaccount --namespace kube-system tiller-sa
+
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller-sa
+
+helm init --tiller-namespace kube-system --service-account tiller-sa
+
+helm repo add application-gateway-kubernetes-ingress https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/
+
+helm repo update
+
+helm repo add aad-pod-identity https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts
+
+helm install aad-pod-identity aad-pod-identity/aad-pod-identity
+
+az identity create -g MC_halo-mvct-rg_halo-mvct-aks_uksouth -n halo-aad-id
+
+
+
+#AAD POD MSI
+
+az role assignment create --role "Contributor" --assignee "c85fa4cd-8999-4bef-8f8e-53d578e62ca6" --scope "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/halo-mvct-rg/providers/Microsoft.Network/applicationGateways/halo-mvct-app-gw"
+
+az role assignment create --role "Reader" --assignee "c85fa4cd-8999-4bef-8f8e-53d578e62ca6" --scope "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/halo-mvct-rg"
+
+#AGENT POOL MSI
+
+az role assignment create --role "Owner" --assignee "fef4eb19-9248-46d2-a0d7-9daa3b4464bd" --scope "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/MC_halo-mvct-rg_halo-mvct-aks_uksouth"
+
+az role assignment create --role "Managed Identity Operator" --assignee "fef4eb19-9248-46d2-a0d7-9daa3b4464bd" --scope "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/MC_halo-mvct-rg_halo-mvct-aks_uksouth"
+
+#OMSAGENT MSI
+
+az role assignment create --role "Managed Identity Operator" --assignee "44ad2218-3bb7-42ec-b05c-e6f87d3bf28a" --scope "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/MC_halo-mvct-rg_halo-mvct-aks_uksouth"
+
+#ANYOTHER MSI IN THE MANAGED RG
+
+az role assignment create --role "Managed Identity Operator" --assignee "e114be25-1287-40b5-8e86-61794ba7531a" --scope "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/MC_halo-mvct-rg_halo-mvct-aks_uksouth"
+
+
+helm repo add application-gateway-kubernetes-ingress https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/
+
+helm repo update
+
+wget https://raw.githubusercontent.com/Azure/application-gateway-kubernetes-ingress/master/docs/examples/sample-helm-config.yaml -O helm-config.yaml
+
+helm install azure-ingress -f helm-config.yaml application-gateway-kubernetes-ingress/ingress-azure --version 1.2.0
+
+curl https://raw.githubusercontent.com/Azure/application-gateway-kubernetes-ingress/master/docs/examples/aspnetapp.yaml -o aspnetapp.yaml
+
+kubectl apply -f aspnetapp.yaml
+
+kubectl get ingress
+
+kubectl delete -f aspnetapp.yaml

@@ -17,6 +17,6 @@ locals {
   request_routing_rule_name      = "${local.appname}-rqrt"
   redirect_configuration_name    = "${local.appname}-rdrcfg"
 
-  acr_name  = "halomvctacr"
+  acr_name  = "halomvctacrnowon"
   
 }

@@ -40,7 +40,7 @@ resource "azurerm_application_gateway" "agw" {
 
   backend_address_pool {
     name  = local.backend_address_pool.name
-    fqdns = local.backend_address_pool.fqdns
+#    fqdns = local.backend_address_pool.fqdns
   }
 
   ssl_certificate {
@@ -53,7 +53,7 @@ resource "azurerm_application_gateway" "agw" {
     cookie_based_affinity = "Disabled"
     port                  = 443
     protocol              = "Https"
-    host_name             = local.backend_address_pool.fqdns[0]
+#    host_name             = local.backend_address_pool.fqdns[0]
     request_timeout       = 1
   }
 
