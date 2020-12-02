@@ -1,0 +1,15 @@
+az hcs create-token --name halohcs --resource-group halo-mvct-rg --output-kubernetes-secret | kubectl apply -f -
+
+az hcs generate-kubernetes-secret --name halohcs --resource-group halo-mvct-rg | kubectl apply -f -
+
+az hcs generate-helm-values --name halohcs --resource-group halo-mvct-rg --aks-cluster-name halo-mvct-aks > config.yaml
+
+helm repo add hashicorp https://helm.releases.hashicorp.com
+
+helm install hcs -f config.yaml hashicorp/consul
+
+kubectl get pods -A
+
+kubectl get secret | grep bootstrap-token
+
+kubectl get secrets/halohcs-bootstrap-token --template={{.data.token}} | base64 --decode

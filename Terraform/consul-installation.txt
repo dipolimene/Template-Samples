@@ -22,16 +22,19 @@ server:
     maxUnavailable: 0
 
 #installation procedure
+#https://learn.hashicorp.com/tutorials/consul/service-mesh-deploy
 
 CONSUL_HELM_VERSION=0.10.0
 
 curl -sL "https://github.com/hashicorp/consul-helm/archive/v$CONSUL_HELM_VERSION.tar.gz" | tar xz
 mv consul-helm-$CONSUL_HELM_VERSION consul-helm
 
-#helm repo add hashicorp https://helm.releases.hashicorp.com
+helm repo add hashicorp https://helm.releases.hashicorp.com
 
 cd consul-helm
 
 edit values.yaml
 
 helm install azure-consul hashicorp/consul -f values.yaml
+
+kubectl get service azure-consul-ui --watch

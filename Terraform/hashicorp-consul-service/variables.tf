@@ -106,7 +106,7 @@ variable "providerBaseURL"{
 
 variable "email"{
   type        = string
-  default     = "aman.bindal@test-and-trace.nhs.uk"
+  default     = "abc@xyz.com"
 } 
 
 variable "federationToken"{
@@ -121,7 +121,7 @@ variable "applicationResourceName"{
 
 variable "managedResourceGroupId"{
   type        = string
-  default    = "/subscriptions/bb9687aa-6b97-47f1-bd9a-7f43b3b0f42d/resourceGroups/mrg-hcs-aks-prod"
+  default    = "/subscriptions/<subId>/resourceGroups/mrg-hcs-aks-prod"
 }
 
 variable "managedIdentity"{

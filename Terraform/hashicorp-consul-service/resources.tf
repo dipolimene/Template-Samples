@@ -30,7 +30,7 @@ resource "azurerm_template_deployment" "hcs" {
     location = var.location
     providerBaseURL = var.providerBaseURL
     email = var.email
-  #  federationToken = var.federationToken
+  # federationToken = var.federationToken
     applicationResourceName = var.applicationResourceName
     managedResourceGroupId = var.managedResourceGroupId
     managedIdentity = var.managedIdentity
