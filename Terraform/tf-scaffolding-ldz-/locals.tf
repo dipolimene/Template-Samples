@@ -8,7 +8,6 @@ locals {
   appname = "halo-mvct-site"
   backend_address_pool = {
     name  = "${local.appname}-pool"
-    fqdns = ["mvctsite.azurewebsites.net"]
   }
   frontend_port_name             = "${local.appname}-feport"
   frontend_ip_configuration_name = "${local.appname}-feip"
@@ -17,6 +16,6 @@ locals {
   request_routing_rule_name      = "${local.appname}-rqrt"
   redirect_configuration_name    = "${local.appname}-rdrcfg"
 
-  acr_name  = "halomvctacrnowon"
+  acr_name  = "halomvctacr"
   
 }

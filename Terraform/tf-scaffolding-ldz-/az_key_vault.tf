@@ -3,7 +3,8 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "kv" {
-  name                       = "${local.prefix}-key-vault"
+#  name                      = "${local.prefix}-ekey-vault"
+  name                       = "halomvctvault"
   location                   = azurerm_resource_group.resource_group.location
   resource_group_name        = azurerm_resource_group.resource_group.name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
@@ -16,7 +17,6 @@ resource "azurerm_key_vault" "kv" {
     #   bypass         = "AzureServices"
     # }
 
-  tags = azurerm_resource_group.resource_group.tags
 }
 
 resource "azurerm_key_vault_access_policy" "builder" {

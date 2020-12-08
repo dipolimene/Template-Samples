@@ -1,6 +1,0 @@
-# Resource Group
-
-resource "azurerm_resource_group" "resource_group" {
-  name     = "${local.prefix}-rg"
-  location = var.location
-}

@@ -114,5 +114,7 @@ output "log_analytics" {
   description = "Log Analytics Workspace reference"
 }
 
-
-
+output "hcs" {
+  value = azurerm_template_deployment.hcs
+  description = "HCS reference"
+}

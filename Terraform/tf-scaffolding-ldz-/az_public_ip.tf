@@ -6,5 +6,5 @@ resource "azurerm_public_ip" "pip" {
   resource_group_name = azurerm_resource_group.resource_group.name
   allocation_method   = "Static"
   sku                 = "Standard"
-  tags                = azurerm_resource_group.resource_group.tags
+
 }
