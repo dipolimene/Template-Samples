@@ -1,0 +1,82 @@
+# Starter pipeline
+
+trigger:
+- master
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    displayName: Build
+
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+    - checkout: self
+    - task: CopyFiles@2
+      displayName: Copy Repo Files
+      inputs:
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Build Artifact
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'Temp'
+        publishLocation: 'Container'
+
+- stage: Release
+  jobs:
+  - job: Release
+
+    pool:
+      vmImage: ubuntu-latest
+    
+    steps:
+    - task: DownloadBuildArtifacts@0
+      displayName: Download Build Artifact
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'Temp'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+    - script: |
+        sudo apt remove azure-cli -y && sudo apt autoremove -y
+        sudo apt-get update
+        sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+        curl -sL https://packages.microsoft.com/keys/microsoft.asc |
+        gpg --dearmor |
+        sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+        AZ_REPO=$(lsb_release -cs)
+        echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |
+        sudo tee /etc/apt/sources.list.d/azure-cli.list
+        sudo apt-get update
+        sudo apt-get install azure-cli=2.15.1-1~bionic
+        sudo az version
+
+    - task: AzureCLI@2
+      displayName: AzCLI AGIC Config
+      inputs:
+        azureSubscription: 'SP-DevOps'
+        scriptType: 'pscore'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          $aksrg = "BACKUP-STORAGE"
+                      
+          $hcsrg = "hcsrg"
+                      
+          $aksvnet = (az network vnet list --resource-group $aksrg --query '[].name' -o tsv)
+                      
+          $aksvnetid = az network vnet list --query "[?name=='$aksvnet']" | jq -r ".[].id"
+                      
+          $hcsvnet = (az network vnet list --resource-group $hcsrg --query '[].name' -o tsv)
+                      
+          $hcsvnetid = az network vnet list --query "[?name=='$hcsvnet']" | jq -r ".[].id"
+                      
+          az network vnet peering create --name akstohcs --resource-group $aksrg --vnet-name $aksvnet --remote-vnet $hcsvnetid --allow-vnet-access
+                      
+          Start-Sleep -Seconds 120
+                      
+          az network vnet peering create --name akstohcs --resource-group $aksrg --vnet-name $hcsvnet --remote-vnet $aksvnetid --allow-vnet-access
