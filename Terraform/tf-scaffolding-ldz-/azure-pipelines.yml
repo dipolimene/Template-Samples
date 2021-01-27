@@ -1,0 +1,170 @@
+# Starter pipeline
+
+trigger:
+- master
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    displayName: Build
+
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+    - checkout: self
+    - task: CopyFiles@2
+      displayName: Copy Repo Files
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/Terraform/tf-scaffolding-ldz-'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Build Artifact
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'Terraform'
+        publishLocation: 'Container'
+
+- stage: Release
+  jobs:
+  - job: Release
+
+    pool:
+      vmImage: ubuntu-latest
+    
+    steps:
+    - task: DownloadBuildArtifacts@0
+      displayName: Download Build Artifact
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'Terraform'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+    - task: TerraformInstaller@0
+      displayName: Install Terraform
+      inputs:
+        terraformVersion: '0.14.0'
+
+    - task: TerraformTaskV1@0
+      displayName: Terraform Init
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.ArtifactsDirectory)/Terraform'
+        backendServiceArm: 'SP-DevOps'
+        backendAzureRmResourceGroupName: 'tfrg'
+        backendAzureRmStorageAccountName: 'tfastorage'
+        backendAzureRmContainerName: 'tfacontainer'
+        backendAzureRmKey: 'halo-aks.tfstate'
+
+    - task: TerraformTaskV1@0
+      displayName: Terraform Plan
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: '$(System.ArtifactsDirectory)/Terraform'
+        environmentServiceNameAzureRM: 'SP-DevOps'
+
+    - task: TerraformTaskV1@0
+      displayName: Teeraform Apply
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        workingDirectory: '$(System.ArtifactsDirectory)/Terraform'
+        commandOptions: '-auto-approve'
+        environmentServiceNameAzureRM: 'SP-DevOps'
+
+    - task: AzureCLI@2
+      displayName: AzCLI AGIC Config
+      inputs:
+        azureSubscription: 'SP-DevOps'
+        scriptType: 'pscore'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          $azsubscriptionname = "12e78806-5110-4aac-ac0b-ec2ea653d93a"
+          $ResourceGroupName = "ataimo-rg"
+          $AKSClusterName = "ataimo-aks"
+          $MgmtName = "ataimo-aad-pod"
+          
+          az account set --subscription "$azsubscriptionname"
+          
+          az aks get-credentials --resource-group $ResourceGroupName --name $AKSClusterName --admin
+          
+          az identity create -g $ResourceGroupName -n $MgmtName
+          
+          Start-Sleep -Seconds 50
+
+          $identityClientId = (az identity show -g $ResourceGroupName -n $MgmtName --query 'clientId' -o tsv)
+          
+          $identityobjectId = (az identity show -g $ResourceGroupName -n $MgmtName --query 'principalId' -o tsv)
+          
+          $identityResourceId = (az identity show -g $ResourceGroupName -n $MgmtName --query 'id' -o tsv)
+          
+          $subscriptionId = (az account show --query 'id' -o tsv)
+          
+          $applicationGatewayName = (az network application-gateway list --resource-group $ResourceGroupName --query '[].name' -o tsv)
+          
+          $AppgwID = az network application-gateway list --query "[?name=='$applicationGatewayName']" | jq -r ".[].id"
+          
+          $AKSNodePoolName = (az aks nodepool list --cluster-name $AKSClusterName --resource-group $ResourceGroupName --query '[].name' -o tsv)
+          
+          $AKSNodePoolID = (az aks nodepool show --cluster-name $AKSClusterName --name $AKSNodePoolName --resource-group $ResourceGroupName --query 'id' -o tsv)
+          
+          $kubeletidentityobjectId = (az aks show -g $ResourceGroupName -n $AKSClusterName --query 'identityProfile.kubeletidentity.objectId' -o tsv)
+          
+          $kubeletidentityResourceID = (az aks show -g $ResourceGroupName -n $AKSClusterName --query 'identityProfile.kubeletidentity.resourceId' -o tsv)
+          
+          $kubeletidentityClientID = (az aks show -g $ResourceGroupName -n $AKSClusterName --query 'identityProfile.kubeletidentity.clientId' -o tsv)
+          
+          $AKSNodeRG = (az aks list --resource-group $ResourceGroupName --subscription $azsubscriptionname --query '[].nodeResourceGroup' -o tsv)
+          
+          az role assignment create --role Contributor --assignee-object-id $identityobjectId --scope $AppgwID
+          
+          $ResourceGroupID = az group list --query "[?name=='$ResourceGroupName']" | jq -r ".[0].id"
+          
+          az role assignment create --role Contributor --assignee-object-id $identityobjectId --scope $ResourceGroupID
+          
+          az role assignment create --assignee-object-id $identityobjectId --role "Contributor" --scope $ResourceGroupID
+          
+          az role assignment create --assignee-object-id $identityobjectId --role "Contributor" --scope $AKSNodePoolID
+          
+          az role assignment create --assignee-object-id $kubeletidentityobjectId  --role "Contributor" --scope /subscriptions/$subscriptionId/resourceGroups/$AKSNodeRG
+          
+          az role assignment create --assignee-object-id $kubeletidentityobjectId  --role "Managed Identity Operator" --scope $identityResourceId
+          
+          kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment-rbac.yaml
+          
+          wget https://raw.githubusercontent.com/Azure/application-gateway-kubernetes-ingress/master/docs/examples/sample-helm-config.yaml -O helm-agic-config.yaml
+          
+          sed -i "" "s|<subscriptionId>|${subscriptionId}|g" helm-agic-config.yaml
+          sed -i "" "s|<resourceGroupName>|${ResourceGroupName}|g" helm-agic-config.yaml
+          sed -i "" "s|<applicationGatewayName>|${applicationGatewayName}|g" helm-agic-config.yaml
+          sed -i "" "s|<identityResourceId>|${identityResourceId}|g" helm-agic-config.yaml
+          sed -i "" "s|<identityClientId>|${identityClientId}|g" helm-agic-config.yaml
+          sed -i -e "" "s|enabled: false # true/false|enabled: true # true/false|" helm-agic-config.yaml
+          
+          helm repo add application-gateway-kubernetes-ingress https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/
+          helm repo update
+          
+          helm upgrade --install appgw-ingress-azure -f helm-agic-config.yaml application-gateway-kubernetes-ingress/ingress-azure
+          
+          Start-Sleep -Seconds 60
+          
+          curl https://raw.githubusercontent.com/Azure/application-gateway-kubernetes-ingress/master/docs/examples/aspnetapp.yaml -o aspnetapp.yaml
+          
+          kubectl apply -f aspnetapp.yaml
+
+          kubectl get ingress
+
+          Start-Sleep -Seconds 120
+
+    - task: TerraformTaskV1@0
+      displayName: Teeraform Destroy
+      inputs:
+        provider: 'azurerm'
+        command: 'destroy'
+        workingDirectory: '$(System.ArtifactsDirectory)/Terraform'
+        environmentServiceNameAzureRM: 'SP-DevOps'

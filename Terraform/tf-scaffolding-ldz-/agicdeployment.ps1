@@ -10,6 +10,8 @@
 #$AKSClusterName = Read-Host 'Enter the name of the AKS Cluster you want to use.'
 #$MgmtName = Read-Host 'Enter the name of the new Managed Identity.'
 
+az login --service-principal -u http://azure-cli-2020-12-01-13-04-20 -p oKl4mE.wTmdVGOKHf96juizai5faH-v3-u --tenant 186fd90f-50d1-4e88-8845-639ce0346a8c
+
 $azsubscriptionname = ""
 $ResourceGroupName = ""
 $AKSClusterName = ""
