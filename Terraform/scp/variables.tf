@@ -1,6 +1,6 @@
 variable "rgname" {
   type        = string
-  default     = "rg-scepmannhpno"
+  default     = "rg-scepmannhpn"
 }
 
 variable "location" {
@@ -25,20 +25,20 @@ variable "appRegistrationKey"{
 
 variable "keyVaultName"{
   type        = string
-  default     = "kv-scepmannhpno"
+  default     = "kv-scepmannhpn"
 }
 
 variable "appServicePlanName"{
   type        = string
-  default     = "plan-scepmannhpno"
+  default     = "plan-scepmannhpn"
 } 
 
 variable "appServiceName"{
   type        = string
-  default     = "app-scepmannhpno"
+  default     = "app-scepmannhpn"
 } 
 
 variable "lawName" {
   type        = string
-  default     = "law-scepmannhpno"
+  default     = "law-scepmannhpn"
 }

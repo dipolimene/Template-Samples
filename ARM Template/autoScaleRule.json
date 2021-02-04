@@ -1,0 +1,70 @@
+{
+    "location": "West Europe",
+    "tags": {
+        "Organization": "Emtwenty Co."
+    },
+    "properties": {
+        "name": "scepman-increase-instance-count",
+        "enabled": true,
+        "targetResourceUri": "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/122pm/providers/Microsoft.Web/serverfarms/ASP-122pm-9e01",
+        "profiles": [
+            {
+                "name": "Auto created scale condition",
+                "capacity": {
+                    "minimum": "1",
+                    "maximum": "10",
+                    "default": "1"
+                },
+                "rules": [
+                    {
+                        "scaleAction": {
+                            "direction": "Increase",
+                            "type": "ChangeCount",
+                            "value": "1",
+                            "cooldown": "PT15M"
+                        },
+                        "metricTrigger": {
+                            "metricName": "CpuPercentage",
+                            "metricNamespace": "microsoft.web/serverfarms",
+                            "metricResourceUri": "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/122pm/providers/Microsoft.Web/serverFarms/ASP-122pm-9e01",
+                            "operator": "GreaterThan",
+                            "statistic": "Average",
+                            "threshold": 70,
+                            "timeAggregation": "Average",
+                            "timeGrain": "PT1M",
+                            "timeWindow": "PT10M",
+                            "Dimensions": [],
+                            "dividePerInstance": true
+                        }
+                    },
+                    {
+                        "scaleAction": {
+                            "direction": "Decrease",
+                            "type": "ChangeCount",
+                            "value": "1",
+                            "cooldown": "PT30M"
+                        },
+                        "metricTrigger": {
+                            "metricName": "CpuPercentage",
+                            "metricNamespace": "microsoft.web/serverfarms",
+                            "metricResourceUri": "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/122pm/providers/Microsoft.Web/serverFarms/ASP-122pm-9e01",
+                            "operator": "LessThan",
+                            "statistic": "Average",
+                            "threshold": 35,
+                            "timeAggregation": "Average",
+                            "timeGrain": "PT1M",
+                            "timeWindow": "PT20M",
+                            "Dimensions": [],
+                            "dividePerInstance": true
+                        }
+                    }
+                ]
+            }
+        ],
+        "notifications": [],
+        "targetResourceLocation": "West Europe"
+    },
+    "id": "/subscriptions/b99f9c12-69c9-4de1-a738-80c58769a372/resourceGroups/122pm/providers/microsoft.insights/autoscalesettings/scepman-increase-instance-count",
+    "name": "scepman-increase-instance-count",
+    "type": "Microsoft.Insights/autoscaleSettings"
+}

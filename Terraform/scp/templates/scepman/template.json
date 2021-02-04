@@ -91,6 +91,10 @@
         "appServiceID": {
             "type": "string",
             "value": "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
-        }
+        },
+        "appServicePlanID": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+        }        
     }
 }
