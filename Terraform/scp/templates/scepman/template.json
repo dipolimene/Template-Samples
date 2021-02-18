@@ -95,6 +95,14 @@
         "appServicePlanID": {
             "type": "string",
             "value": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+        },
+        "subscriptionID": {
+            "type": "string",
+            "value": "[subscription().subscriptionId]"
+        },
+        "mainapphostname": {
+            "type": "string",
+            "value": "[concat(parameters('appServiceName'),'.azurewebsites.net')]"
         }        
     }
 }

@@ -9,10 +9,10 @@ resource "azurerm_template_deployment" "scepman" {
   parameters = {
 
     OrgName             = var.OrgName
-    #appRegistrationGuid = var.appRegistrationGuid
-    #appRegistrationKey  = var.appRegistrationKey
-    appRegistrationGuid = azurerm_key_vault_secret.appID.value
-    appRegistrationKey  = azurerm_key_vault_secret.appSecretID.value
+    appRegistrationGuid = var.appRegistrationGuid
+    appRegistrationKey  = var.appRegistrationKey
+    #appRegistrationGuid = data.azurerm_key_vault_secret.scepman_appID.value
+    #appRegistrationKey  = data.azurerm_key_vault_secret.scepman_secretID.value
     keyVaultName        = var.keyVaultName
     appServicePlanName  = var.appServicePlanName
     appServiceName      = var.appServiceName

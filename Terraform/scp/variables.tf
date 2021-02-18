@@ -1,44 +1,81 @@
 variable "rgname" {
   type        = string
-  default     = "rg-scepmannhpn"
+  default     = "rg-wexsw"
 }
 
 variable "location" {
   type        = string
-  default     = "uksouth"
+  default     = "West Europe"
 }
 
 variable "OrgName"{
   type        = string
-  default     = "NHP"
+  default     = "wexsw"
 }  
 
 variable "appRegistrationGuid"{
   type        = string
-  default     = "013c514e-3324-4d77-b9a7-971e2156c6eb"
+  default     = ""
 }
 
 variable "appRegistrationKey"{
   type        = string
-  default     = "WAhCk9~_FyML_Y3gwvyt6hV27ehKhT~-87"
+  default     = ""
 }
 
 variable "keyVaultName"{
   type        = string
-  default     = "kv-scepmannhpn"
+  default     = "kv-wexsw"
 }
 
 variable "appServicePlanName"{
   type        = string
-  default     = "plan-scepmannhpn"
+  default     = "plan-wexsw"
 } 
 
 variable "appServiceName"{
   type        = string
-  default     = "app-scepmannhpn"
+  default     = "app-wexsw"
 } 
 
 variable "lawName" {
   type        = string
-  default     = "law-scepmannhpn"
+  default     = "law-wexsw"
+}
+
+#clone variables
+
+variable "cloneappServiceName" {
+  type        = string
+  default     = "app-wsxew"
+}
+
+variable "cloneappServicePlanName"{
+  type        = string
+  default     = "plan-wsxew"
+}
+
+variable "clonehostingEnvironment" {
+  type        = string
+  default     = ""
+}
+
+variable "clonelocation" {
+  type        = string
+  default     = "West US"
+}
+
+variable "clonesku" {
+  type        = string
+  default     = "Standard"
+}
+
+variable "cloneskucode"{
+  type        = string
+  default     = "S1"
+}
+
+variable "cloneworkersize" {
+  type        = string
+  default     = "0"
 }

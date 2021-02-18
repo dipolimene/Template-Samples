@@ -13,10 +13,22 @@ output "scp_appServicePlan_Id" {
   description = "Scepman App Service Plan ID"
 }
 
-output "appID" {
-  value = azurerm_key_vault_secret.appID
+output "subscriptionID" {
+  value = lookup(azurerm_template_deployment.scepman.outputs, "subscriptionID")
+  description = "SubscriptionID"
 }
 
-output "secretID" {
-  value = azurerm_key_vault_secret.appSecretID
+output "mainapphostname" {
+  value = lookup(azurerm_template_deployment.scepman.outputs, "mainapphostname")
+  description = "mainapphostname"
+}
+
+output "cloneapphostname" {
+  value = lookup(azurerm_template_deployment.scepman_clone_app.outputs, "cloneapphostname")
+  description = "cloneapphostname"
+}
+
+output "cloneappServiceID" {
+  value = lookup(azurerm_template_deployment.scepman_clone_app.outputs, "cloneappServiceID")
+  description = "cloneappServiceID"
 }
